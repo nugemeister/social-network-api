@@ -2,7 +2,7 @@ const {User, Thought} = require('../models');
 
 const userController = {
     // Get all Users
-    getUsers(req, res) {
+    getUsers (req, res) {
         User.find({})
             .select('-__v')
             .then(userData => res.json(userData))
