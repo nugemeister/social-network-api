@@ -1,0 +1,24 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "## Project Explained The purpose of this project is to create an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. <br></br>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nugemeister/social-network-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nugemeister/social-network-api/issues"
+  },
+  "homepage": "https://github.com/nugemeister/social-network-api#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  }
+}
