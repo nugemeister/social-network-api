@@ -10,24 +10,15 @@ const userController = {
     },
 
     // Get a User by ID
-    getUserById({params}, res) {
-        User.findOne({_id: params.id})
-            .populate({
-                path: 'friends',
-                select: '-__v'
-            })
-            .populate({
-                path: 'thoughts',
-                select: '-__v'
-            })
+    getSingleUser(req, res) {
+        User.findOne({_id: req.params.userId})
             .select('-__v')
-            .then(userData => {
-                if(!userData) {
-                    res.status(404).json({message: 'Please enter a valid user ID.'});
-                    return;
-                }
-                res.json(userData);
-            })
+            .populate('thoughts friends')
+            .then((userData) =>
+                !userData
+                    ? res.status(404).json({ message: 'Please enter a valid user ID.'})
+                    : res.json(userData)
+            )
             .catch(err => res.status(500).json(err));
     },
 
@@ -39,15 +30,13 @@ const userController = {
     },
 
     // Update a User by ID
-    updateUser ({params, body}, res) {
-        User.findOneAndUpdate({_id: params.id}, body, {new: true, runValidators: true})
-            .then(userData => {
-                if(!userData) {
-                    res.status(404).json({message: 'Please enter a valid user ID.'});
-                    return;
-                }
-                res.json(userData);
-            })
+    updateUser (req, res) {
+        User.findOneAndUpdate({_id: req.params.userId}, {$set: req.body}, {new: true, runValidators: true})
+            .then((userData) => 
+                !userData
+                    ? res.status(404).json({message: 'Please enter a valid user ID.'})
+                    : res.json(userData)
+            )
             .catch(err => res.status(500).json(err));
     },
 

@@ -3,7 +3,7 @@ const router = require('express').Router();
 // Import Info from User Controller File
 const {
     getUsers,
-    getUserById,
+    getSingleUser,
     createUser,
     updateUser,
     deleteUser,
@@ -18,7 +18,7 @@ router.route('/')
 
 // Route for api/user/:userId
 router.route('/:userId')
-    .get(getUserById)
+    .get(getSingleUser)
     .put(updateUser)
     .delete(deleteUser);
 

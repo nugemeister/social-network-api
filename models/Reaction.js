@@ -1,4 +1,4 @@
-const {Schema, model, Types} = require('mongoose');
+const {Schema, Types} = require('mongoose');
 
 // Reaction Model Schema
 const reactionSchema = new Schema(
@@ -37,8 +37,8 @@ function formatDate(date) {
     return date.toLocalString();
 };
 
-// Init the Reaction Model
-const Reaction = model('Reaction', reactionSchema);
+// // Init the Reaction Model
+// const Reaction = model('Reaction', reactionSchema);
 
 // export
-module.exports = Reaction;
+module.exports = reactionSchema;
