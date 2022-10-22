@@ -41,45 +41,39 @@ const userController = {
     },
 
     // Delete a User
-    deleteUser({params}, res) {
-        User.findOneAndDelete({_id: params.id})
-            .then(userData => {
-                if(!userData) {
-                    res.status(404).json({message: 'Please enter a valid user ID.'});
-                    return;
-                }
-                // Delete the User's associated Thoughts
-                return Thought.deleteMany({_id: {$in: userData.thoughts}});
-            })
+    deleteUser(req, res) {
+        User.findOneAndDelete({_id: req.params.userId})
+            .then((userData) => 
+                !userData
+                    ? res.status(404).json({message: 'Please enter a valid user ID.'})
+                    // Delete the User's associated Thoughts
+                    : Thought.deleteMany({_id: {$in: userData.thoughts}})
+            )
             .then(() => res.json({message: 'The selected user and their associated thoughts have been deleted.'}))
             .catch(err => res.status(500).json(err));
     },
 
     // Add a Friend to User's Friend List by ID
-    addFriend({params}, res) {
-        User.findOneAndUpdate({_id: params.userId}, {$addToSet: {friends: params.friendId}}, {new: true})
-            .then(userData => {
-                if(!userData) {
-                    res.status(404).json({message: 'Please enter a valid user ID.'});
-                    return;
-                }
-                res.json(userData);
-            })
-            .catch(err => res.status(500).json(err));
+    addFriend(req, res) {
+        User.findOneAndUpdate({_id: req.params.userId}, {$addToSet: {friends: req.params.friendId}}, {new: true, runValidators: true})
+            .then((userData) =>
+                !userData
+                    ? res.status(404).json({message: 'Please enter a valid user ID.'})
+                    : res.json(userData)
+            )
+            .catch((err) => res.status(500).json(err));
     },
 
     // Remove a Friend from a User's Friend List by ID
-    removeFriend({params}, res) {
-        User.findOneAndUpdate({_id: params.userId}, {$pull: {friends: params.friendId}}, {new: true})
-            .then(userData => {
-                if(!userData) {
-                    res.status(404).json({message: 'Please enter a valid user ID.'});
-                    return;
-                }
-                res.json(userData);
-            })
-            .catch(err => res.status(500).json(err));
-    }
+    removeFriend(req, res) {
+        User.findOneAndUpdate({_id: req.params.userId}, {$pull: {friends: req.params.friendId}}, {new: true, runValidators: true})
+            .then((userData) =>
+                !userData
+                    ? res.status(404).json({message: 'Please enter a valid user ID.'})
+                    : res.json(userData)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
 };
 
 // export
