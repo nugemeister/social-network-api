@@ -3,7 +3,7 @@ const router = require('express').Router();
 // Import Info from Thought Controller File
 const {
     getThoughts,
-    getThoughtById,
+    getSingleThought,
     createThought,
     updateThought,
     deleteThought,
@@ -18,7 +18,7 @@ router.route('/')
 
 // Route for api/thoughts/:thoughtId
 router.route('/:thoughtId')
-    .get(getThoughtById)
+    .get(getSingleThought)
     .put(updateThought)
     .delete(deleteThought);
 
