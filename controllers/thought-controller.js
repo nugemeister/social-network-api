@@ -2,10 +2,11 @@ const {Thought, Reaction, User} = require('../models');
 
 const thoughtController = {
     // Get all Thoughts
-    getThoughts (req, res) {
-        Thought.find()
-        .then(thoughtData => res.json(thoughtData))
-        .catch(err => res.status(500).json(err));
+    getThoughts(req, res) {
+        Thought.find({})
+            .select('-__v')
+            .then((thoughtData) => res.json(thoughtData))
+            .catch((err) => res.status(500).json(err));
     },
 
     // Get Thought by ID

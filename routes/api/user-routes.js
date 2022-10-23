@@ -11,7 +11,7 @@ const {
     removeFriend,
 } = require('../../controllers/user-controller');
 
-// Route for api/users
+// Route for api/user
 router.route('/')
     .get(getUsers)
     .post(createUser);
