@@ -1,6 +1,6 @@
 // import Mongoose
-const {Schema, model} = require('mongoose');
-const Reaction = require('./Reaction');
+const {Schema, model, Types} = require('mongoose');
+const reactionSchema = require('./Reaction');
 
 // Thought Model Schema
 const thoughtSchema = new Schema(
@@ -20,12 +20,7 @@ const thoughtSchema = new Schema(
             type: String,
             required: true,
         },
-        reactions: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Reaction'
-            }
-        ],
+        reactions: [reactionSchema],
     },
     {
         toJSON: {
@@ -39,7 +34,7 @@ const thoughtSchema = new Schema(
 
 // Format date data returned
 function formatDate(date) {
-    return date !== undefined ? date.toLocalString() : undefined;
+    return new Date (date).toLocaleString()
 };
 
 // Return a count of reactions
@@ -47,7 +42,7 @@ thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
 
-// Init the Thought Model
+/**  Init the Thought Model */
 const Thought = model('Thought', thoughtSchema);
 
 // export

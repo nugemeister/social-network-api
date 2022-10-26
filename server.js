@@ -1,7 +1,9 @@
 const express = require('express');
 const db = require('./config/connection');
 const thoughtController = require('./controllers/thought-controller');
-const { Thought } = require('./models');
+const { Thought, User, Reaction } = require('./models');
+const userController = require('./controllers/user-controller');
+
 const routes = require('./routes');
 
 
