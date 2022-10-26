@@ -6,7 +6,7 @@ const thoughtController = {
         Thought.find()
             .select("-__v")
             .then((thoughtData) => res.json(thoughtData))
-            .catch((err) => res.status(500).json(err));
+            .catch((err) => res.status(500).send(err.message));
     },
 
     // Get Thought by ID

@@ -39,7 +39,7 @@ const thoughtSchema = new Schema(
 
 // Format date data returned
 function formatDate(date) {
-    return date.toLocalString();
+    return date !== undefined ? date.toLocalString() : undefined;
 };
 
 // Return a count of reactions
