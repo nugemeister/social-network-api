@@ -46,6 +46,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 <br></br>
 ## Video Demo
 > The following videos show the web application's appearance and functionality:
+[HW18 Demo.mp4.zip](https://github.com/nugemeister/social-network-api/files/9885331/HW18.Demo.mp4.zip)
 
 
 ---
